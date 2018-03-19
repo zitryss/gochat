@@ -28,7 +28,7 @@ func (h *handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 func main() {
 	gomniauth.SetSecurityKey("PUT YOUR AUTH KEY HERE")
 	gomniauth.WithProviders(
-		github.New("a126fa1fa26ecd304407", "0ff076d3e6ed46ddb1c75ee37d1007906e785f8b", "http://localhost:9999/auth/callback/github"),
+		github.New("a126fa1fa26ecd304407", "0ff076d3e6ed46ddb1c75ee37d1007906e785f8b", "http://localhost:9000/auth/callback/github"),
 	)
 
 	r := newRoom()
@@ -40,7 +40,7 @@ func main() {
 	http.Handle("/login", &handler{tmpl2})
 	http.HandleFunc("/auth/", loginHandler)
 	http.Handle("/room", r)
-	err := http.ListenAndServe("localhost:8080", nil)
+	err := http.ListenAndServe("localhost:9000", nil)
 	if err != nil {
 		fmt.Print(err)
 	}
